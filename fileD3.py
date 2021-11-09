@@ -13,18 +13,18 @@ with open('recept.txt', encoding='utf-8') as fale:
         cook_book[dish_name] = cook_box
         fale.readline()
 
-# Нужно написать функцию, которая на вход принимает список блюд из cook_book и количество персон для кого мы будем готовить
-#
 def get_shop_list_by_dishes(dishes, person_count):
-    rezult = {}
-    options = {}
-    person_count = float(person_count)
     for dish1 in dishes:
+        rezult = {}
         if dish1 in cook_book.keys():
             for status in cook_book.get(dish1):
-                options['measure'] = status.get('measure')
-                options['quantity'] = int(status.get('quantity')) * person_count
-                rezult[status['ingredient_name']] = options
-    print(rezult)
+                options_mesh = {}
+                options_mesh['measure'] = status.get('measure')
+                options_quanti = {}
+                options_quanti['quantity'] = int(status.get('quantity')) * person_count
+                all_option = {}
+                all_option = options_mesh | options_quanti
+                rezult[status.get('ingredient_name')] = all_option
+        pprint(rezult)
 
-get_shop_list_by_dishes(['Омлет','Фахитос'], 9)
+get_shop_list_by_dishes(['Омлет','Омлет','Фахитос'], 1)
